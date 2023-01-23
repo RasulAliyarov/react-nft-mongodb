@@ -9,18 +9,9 @@ import { useEffect } from 'react'
 function Modal({ modal, id, setModal }) {
     let [nftIds, setNftIds] = useState("")
 
-    useEffect(() => {
-        axios.get("http://localhost:8080/api/nft").then(res => {
-            res.data.map(value => {
-                setNftIds(value._id)
-            })
-        })
-        axios.post(`http://localhost:8080/api/ar tist/nfts/${id}`, {
-            data: nftIds
-        })
-    }, [nftIds])
+    // useEffect(() => {
 
-    console.log(nftIds)
+    // }, [nftIds])
 
     const artistShema = Yup.object().shape({
         name: Yup.string().min(1, "Min symbol 1!").max(30, "Max symbol 30!").required("Please write name!"),
@@ -41,8 +32,22 @@ function Modal({ modal, id, setModal }) {
                 name: values.name,
                 price: values.price,
                 bid: values.bid,
-            }
-            )
+            })
+                .then(() => {
+                    axios.get("http://localhost:8080/api/nft").then(res =>
+                        res.data.map(value => {
+                            setNftIds(value._id)
+                        })
+                    )
+                })
+                .then(() => {
+                    axios.post(`http://localhost:8080/api/artist/nfts/${id}`, {
+                        data: nftIds
+                    })
+                    console.log("data is send")
+                })
+                .catch((i) => console.log(i, "data is not send"))
+
         }
     })
 
@@ -65,7 +70,6 @@ function Modal({ modal, id, setModal }) {
                     {formik.errors.bid && formik.touched.bid ? (<div className='errorMessage'>{formik.errors.bid}</div>) : null}
                     <input type="text" name="bid" placeholder='Highest Bid' onChange={formik.handleChange} onBlur={formik.handleBlur} />
                     <button type='submit' onClick={() => {
-
                     }} >Create</button>
                 </form>
             </div>

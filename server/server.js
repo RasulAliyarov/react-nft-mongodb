@@ -124,7 +124,7 @@ app.post("/api/nft/create",
 app.post("/api/artist/nfts/:artistID",
     (req, res) => {
 
-        console.log(req.params.artistID)
+        console.log(req.params.artistID, "artId")
         console.log(req.body.data, "body")
 
         ArtistModel.findByIdAndUpdate(

@@ -3,6 +3,7 @@ import "./Rankings.scss"
 import Modal from "../../components/Modal"
 import { useState } from 'react'
 import axios from 'axios'
+import Nft from '../../components/NFT'
 
 function Rankings() {
 
@@ -13,10 +14,10 @@ function Rankings() {
   useEffect(() => {
     axios.get("http://localhost:8080/api/artist").then(res => {
       setArtist(res.data)
-      console.log(res.data)
     })
   }, [])
 
+  console.log(artist)
   return (
     <div className="rankings" >
       <div className="rankings__top">
@@ -54,6 +55,7 @@ function Rankings() {
         <div className="rankings__content__artists">
           {
             artist.map((artist, index) => {
+              <Nft key={index} name={artist.userName} />
               return (
                 <div key={artist._id} className="rankings__content__artists__artist">
                   <div className='index'><span>{index}</span></div>
@@ -74,8 +76,7 @@ function Rankings() {
           }
         </div>
       </div>
-
-      <Modal modal={modal} id={id} setModal={setModal}  />
+      <Modal modal={modal} id={id} setModal={setModal} />
     </div >
   )
 }

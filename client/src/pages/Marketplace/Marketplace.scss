@@ -3,6 +3,7 @@
 }
 
 .marketplace {
+
     &__top {
         border-bottom: 1px solid #4e4e4e;
         padding: 80px;
@@ -103,13 +104,16 @@
     &__content {
         display: flex;
         background-color: #3B3B3B;
+        padding-bottom: 40px;
+        height: fit-content;
 
         &__cards {
             display: flex;
             width: 1050px;
             margin: 60px auto 60px;
             gap: 30px;
-            height: 100vh;
+            flex-wrap: wrap;
+            justify-content: center;
         }
     }
 }
@@ -172,9 +176,10 @@
                 width: 80%;
 
                 &__left {
-                    h5{
+                    h5 {
                         font-size: 16px;
                     }
+
                     span {
                         padding: 4px 12px !important;
                         font-size: 12px;
@@ -182,9 +187,10 @@
                 }
 
                 &__right {
-                    h5{
+                    h5 {
                         font-size: 16px;
                     }
+
                     span {
                         font-size: 12px;
                         padding: 4px 12px !important;

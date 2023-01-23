@@ -8,12 +8,11 @@ import { useState } from 'react'
 function Markteplace() {
   const [nft, setNft] = useState([])
   useEffect(() => {
-    axios.get("http://localhost:8080/api/artist").then(res => {
+    axios.get("http://localhost:8080/api/nft").then(res => {
       setNft(res.data)
       console.log(res.data)
     })
   }, [])
-
   return (
     <div className='marketplace '>
       <div className="marketplace__top">
@@ -29,7 +28,7 @@ function Markteplace() {
         <div className="marketplace__tabs__wrapper">
 
           <div className="marketplace__tabs__wrapper__left tab">
-            <h5>Nfts</h5> <span>302</span>
+            <h5>Nfts</h5> <span>{nft.length}</span>
           </div>
           <div className="marketplace__tabs__wrapper__right tab">
             <h5>Collections</h5> <span>67</span>
@@ -39,11 +38,11 @@ function Markteplace() {
 
       <div className="marketplace__content">
         <div className="marketplace__content__cards">
-          {/* {
+          {
             nft.map(nft => {
               return <NFT key={nft._id} nft={nft}  />
             })
-          } */}
+          }
         </div>
       </div>
     </div>
